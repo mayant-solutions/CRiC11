@@ -18,6 +18,8 @@ class BatType(models.Model):
     sixes = models.IntegerField("Sixes", null=True)
 
 
+
+
 class BallType(models.Model):
     M = models.IntegerField("Matches", null=True)
     Inn = models.IntegerField("Innings", null=True)
@@ -34,17 +36,17 @@ class BallType(models.Model):
 
 
 class Bat(models.Model):
-    odibat = models.OneToOneField(BatType, on_delete=models.CASCADE, related_name='odiba',null=True)
-    testbat = models.OneToOneField(BatType, on_delete=models.CASCADE, related_name='testba',null=True)
-    ttbat = models.OneToOneField(BatType, on_delete=models.CASCADE, related_name='ttba',null=True)
-    iplbat = models.OneToOneField(BatType, on_delete=models.CASCADE, related_name='iplba',null=True)
+    odibat = models.OneToOneField(BatType, on_delete=models.CASCADE, related_name='odiba', null=True)
+    testbat = models.OneToOneField(BatType, on_delete=models.CASCADE, related_name='testba', null=True)
+    ttbat = models.OneToOneField(BatType, on_delete=models.CASCADE, related_name='ttba', null=True)
+    iplbat = models.OneToOneField(BatType, on_delete=models.CASCADE, related_name='iplba', null=True)
 
 
 class Bowl(models.Model):
-    odiball = models.OneToOneField(BallType, on_delete=models.CASCADE, related_name='odib',null=True)
-    testball = models.OneToOneField(BallType, on_delete=models.CASCADE, related_name='testb',null=True)
-    ttball = models.OneToOneField(BallType, on_delete=models.CASCADE, related_name='ttb',null=True)
-    iplball = models.OneToOneField(BallType, on_delete=models.CASCADE, related_name='iplb',null=True)
+    odiball = models.OneToOneField(BallType, on_delete=models.CASCADE, related_name='odib', null=True)
+    testball = models.OneToOneField(BallType, on_delete=models.CASCADE, related_name='testb', null=True)
+    ttball = models.OneToOneField(BallType, on_delete=models.CASCADE, related_name='ttb', null=True)
+    iplball = models.OneToOneField(BallType, on_delete=models.CASCADE, related_name='iplb', null=True)
 
 
 class Player(models.Model):
@@ -56,5 +58,6 @@ class Player(models.Model):
     role = models.CharField("Role", max_length=15, null=True)
     batstyle = models.CharField("Bat Style", max_length=15, null=True)
     ballstyle = models.CharField("Ball Style", max_length=15, null=True)
-
-
+    profile = models.CharField("Ball Style", max_length=30000, null=True)
+    def __str__(self):
+        return self.name
