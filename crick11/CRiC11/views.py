@@ -1,17 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.views import generic
 from .models import Player
 
 
 # Create your views here.
 class IndexView(generic.ListView):
-    template_name = 'Players/index.html'
+    context_object_name = 'player'
+    template_name = 'Playerlist.html'
     model = Player
 
     def get_queryset(self):
-        return Player.object.all()
+        return Player.objects.all()
 
 
-class DetailView(generic.DetailView):
+class DetailView1(generic.DetailView):
+    context_object_name = 'players'
     model = Player
-    template_name = 'Players/detail.html'
+    template_name = 'CRiC11/Players.html'
