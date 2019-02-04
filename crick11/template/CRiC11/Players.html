@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% extends 'CRiC11/base.html'%}
+{% block content %}
 <h1>{{ players.name }}</h1>
 <p>{{ players.born }}</p>
 <P>{{players.birth}}</P>
@@ -6,16 +8,186 @@
 <P>{{players.batstyle}}</P>
 <P>{{players.ballstyle}}</P>
 <P>{{players.profile}}</P>
-<P>{{players.Bat.odibat.M}}</p>
-<p>{{players.Bat.odibat.Inn}}</p>
-<p>{{players.Bat.odibat.NO}}</p>
-<p>{{players.Bat.odibat.Runs}}</p>
-<p>{{players.Bat.odibat.HS}}</p>
-<p>{{players.Bat.odibat.Avg}}</p>
-<p>{{players.Bat.odibat.BF}}</p>
-<p>{{players.Bat.odibat.SR}}</p>
-<p>{{players.Bat.odibat.century}}</p>
-<p>{{players.Bat.odibat.double}}</p>
-<p>{{players.Bat.odibat.fifty}}</p>
-<p>{{players.Bat.odibat.Fours}}</p>
-<p>{{players.Bat.odibat.Sixes}}</p>
+
+<div class="container">
+
+  <table class="table table-striped">
+    <caption>BATTING</caption>
+    <thead>
+
+      <tr>
+          <th>Format</th>
+        <th>M</th>
+        <th>Inn</th>
+        <th>NO</th>
+          <th>Runs</th>
+          <th>HS</th>
+          <th>Avg</th>
+          <th>BF</th>
+          <th>SR</th>
+          <th>100</th>
+          <th>200</th>
+          <th>50</th>
+          <th>4s</th>
+          <th>6s</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Test</td>
+          <td>{{players.Bat.testbat.M}}</td>
+          <td>{{players.Bat.testbat.Inn}}</td>
+          <td>{{players.Bat.testbat.NO}}</td>
+             <td>{{players.Bat.testbat.Runs}}</td>
+             <td>{{players.Bat.testbat.HS}}</td>
+             <td>{{players.Bat.testbat.Avg}}</td>
+             <td>{{players.Bat.testbat.BF}}</td>
+             <td>{{players.Bat.testbat.SR}}</td>
+             <td>{{players.Bat.testbat.century}}</td>
+             <td>{{players.Bat.testbat.double}}</td>
+             <td>{{players.Bat.testbat.fifty}}</td>
+             <td>{{players.Bat.testbat.fours}}</td>
+             <td>{{players.Bat.testbat.sixes}}</td>
+      </tr>
+      <tr>
+         <td>ODI</td>
+          <td>{{players.Bat.odibat.M}}</td>
+          <td>{{players.Bat.odibat.Inn}}</td>
+          <td>{{players.Bat.odibat.NO}}</td>
+             <td>{{players.Bat.odibat.Runs}}</td>
+             <td>{{players.Bat.odibat.HS}}</td>
+             <td>{{players.Bat.odibat.Avg}}</td>
+             <td>{{players.Bat.odibat.BF}}</td>
+             <td>{{players.Bat.odibat.SR}}</td>
+             <td>{{players.Bat.odibat.century}}</td>
+             <td>{{players.Bat.odibat.double}}</td>
+             <td>{{players.Bat.odibat.fifty}}</td>
+             <td>{{players.Bat.odibat.fours}}</td>
+             <td>{{players.Bat.odibat.sixes}}</td>
+      </tr>
+      <tr>
+         <td>T20</td>
+          <td>{{players.Bat.ttbat.M}}</td>
+          <td>{{players.Bat.ttbat.Inn}}</td>
+          <td>{{players.Bat.ttbat.NO}}</td>
+             <td>{{players.Bat.ttbat.Runs}}</td>
+             <td>{{players.Bat.ttbat.HS}}</td>
+             <td>{{players.Bat.ttbat.Avg}}</td>
+             <td>{{players.Bat.ttbat.BF}}</td>
+             <td>{{players.Bat.ttbat.SR}}</td>
+             <td>{{players.Bat.ttbat.century}}</td>
+             <td>{{players.Bat.ttbat.double}}</td>
+             <td>{{players.Bat.ttbat.fifty}}</td>
+             <td>{{players.Bat.ttbat.fours}}</td>
+             <td>{{players.Bat.ttbat.sixes}}</td>
+      </tr>
+      <tr>
+         <td>IPL</td>
+          <td>{{players.Bat.iplbat.M}}</td>
+          <td>{{players.Bat.iplbat.Inn}}</td>
+          <td>{{players.Bat.iplbat.NO}}</td>
+             <td>{{players.Bat.iplbat.Runs}}</td>
+             <td>{{players.Bat.iplbat.HS}}</td>
+             <td>{{players.Bat.iplbat.Avg}}</td>
+             <td>{{players.Bat.iplbat.BF}}</td>
+             <td>{{players.Bat.iplbat.SR}}</td>
+             <td>{{players.Bat.iplbat.century}}</td>
+             <td>{{players.Bat.iplbat.double}}</td>
+             <td>{{players.Bat.iplbat.fifty}}</td>
+             <td>{{players.Bat.iplbat.fours}}</td>
+             <td>{{players.Bat.iplbat.sixes}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped">
+    <caption>BOWLING</caption>
+     <thead>
+
+      <tr>
+          <th>Format</th>
+        <th>M</th>
+        <th>Inn</th>
+        <th>B</th>
+          <th>Runs</th>
+          <th>Wkts</th>
+          <th>BBI</th>
+          <th>BBM</th>
+          <th>Econ</th>
+          <th>Avg</th>
+          <th>SR</th>
+          <th>5W</th>
+          <th>10W</th>
+      </tr>
+   </thead>
+    <tbody>
+      <tr>
+        <td>Test</td>
+          <td>{{players.Ball.testball.M}}</td>
+          <td>{{players.Ball.testball.Inn}}</td>
+          <td>{{players.Ball.testball.B}}</td>
+             <td>{{players.Ball.testball.Runs}}</td>
+             <td>{{players.Ball.testball.Wkts}}</td>
+             <td>{{players.Ball.testball.BBI}}</td>
+             <td>{{players.Ball.testball.BBM}}</td>
+             <td>{{players.Ball.testball.Econ}}</td>
+             <td>{{players.Ball.testball.Avg}}</td>
+             <td>{{players.Ball.testball.SR}}</td>
+             <td>{{players.Ball.testball.fwh}}</td>
+             <td>{{players.Ball.testball.twh}}</td>
+      </tr>
+      <tr>
+         <td>ODI</td>
+          <td>{{players.Ball.odiball.M}}</td>
+          <td>{{players.Ball.odiball.Inn}}</td>
+          <td>{{players.Ball.odiball.B}}</td>
+             <td>{{players.Ball.odiball.Runs}}</td>
+             <td>{{players.Ball.odiball.Wkts}}</td>
+             <td>{{players.Ball.odiball.BBI}}</td>
+             <td>{{players.Ball.odiball.BBM}}</td>
+             <td>{{players.Ball.odiball.Econ}}</td>
+             <td>{{players.Ball.odiball.Avg}}</td>
+             <td>{{players.Ball.odiball.SR}}</td>
+             <td>{{players.Ball.odiball.fwh}}</td>
+             <td>{{players.Ball.odiball.twh}}</td>
+      </tr>
+      <tr>
+         <td>T20</td>al
+          <td>{{players.Ball.ttball.M}}</td>
+          <td>{{players.Ball.ttball.Inn}}</td>
+          <td>{{players.Ball.ttball.B}}</td>
+             <td>{{players.Ball.ttball.Runs}}</td>
+             <td>{{players.Ball.ttball.Wkts}}</td>
+             <td>{{players.Ball.ttball.BBI}}</td>
+             <td>{{players.Ball.ttball.BBM}}</td>
+             <td>{{players.Ball.ttball.Econ}}</td>
+             <td>{{players.Ball.ttball.Avg}}</td>
+             <td>{{players.Ball.ttball.SR}}</td>
+             <td>{{players.Ball.ttball.fwh}}</td>
+             <td>{{players.Ball.ttball.twh}}</td>
+      </tr>
+      <tr>
+         <td>IPL</td>
+          <td>{{players.Ball.iplball.M}}</td>
+          <td>{{players.Ball.iplball.Inn}}</td>
+          <td>{{players.Ball.iplball.B}}</td>
+             <td>{{players.Ball.iplball.Runs}}</td>
+             <td>{{players.Ball.iplball.BBI}}</td>
+             <td>{{players.Ball.iplball.BBM}}</td>
+             <td>{{players.Ball.iplball.BF}}</td>
+             <td>{{players.Ball.iplball.Econ}}</td>
+             <td>{{players.Ball.iplball.Avg}}</td>
+             <td>{{players.Ball.iplball.SR}}</td>
+             <td>{{players.Ball.iplball.fwh}}</td>
+             <td>{{players.Ball.iplball.twh}}</td>
+
+      </tr>
+     <thead>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+
+

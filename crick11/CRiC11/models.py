@@ -18,8 +18,6 @@ class BatType(models.Model):
     sixes = models.IntegerField("Sixes", null=True)
 
 
-
-
 class BallType(models.Model):
     M = models.IntegerField("Matches", null=True)
     Inn = models.IntegerField("Innings", null=True)
@@ -59,5 +57,11 @@ class Player(models.Model):
     batstyle = models.CharField("Bat Style", max_length=15, null=True)
     ballstyle = models.CharField("Ball Style", max_length=15, null=True)
     profile = models.CharField("Ball Style", max_length=30000, null=True)
+
     def __str__(self):
         return self.name
+
+
+class Team(models.Model):
+    name = models.CharField("Team Name", max_length=15, null=True)
+    rank = models.IntegerField("Rankings", null=True)
