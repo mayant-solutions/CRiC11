@@ -21,11 +21,24 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
+       {% if user.is_authenticated %}
       <li><a href="#">Live Score</a></li>
       <li><a href="#">Schedule</a></li>
         <li><a href="#">Series</a></li>
+        <li><a href="#">News</a></li>
         <li><a href="#">Teams</a></li>
         <li><a href="#">Rankings</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+
+    <li>User :{{user.username}}</li>
+    <li><a href="{% url 'logout' %}?next={{request.path}}"><span class="glyphicon glyphicon-log-out"></span>Log Out</a> </li>
+    {% else %}
+    <li><a href="{% url 'tenderApp:register'%"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+
+    <li><a href="{% url 'login' %}?next={{request.path}}"><span class="glyphicon glyphicon-log-in">LogIn</span></a></li>
+    {% endif %}
+
     </ul>
     <form class="navbar-form navbar-left" action="/action_page.php">
       <div class="form-group">

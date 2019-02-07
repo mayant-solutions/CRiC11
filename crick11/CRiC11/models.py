@@ -62,6 +62,20 @@ class Player(models.Model):
         return self.name
 
 
-class Team(models.Model):
-    name = models.CharField("Team Name", max_length=15, null=True)
-    rank = models.IntegerField("Rankings", null=True)
+class Matches(models.Model):
+    batting = models.CharField("Batting", max_length=15, null=True)
+    bowling = models.CharField("Bowling", max_length=15, null=True)
+    batsman = models.CharField("Batsman", max_length=15, null=True)
+    bowler = models.CharField("Bowler", max_length=15, null=True)
+    runrate = models.FloatField("Runratee", null=True)
+    patnership = models.IntegerField("Partnership", null=True)
+    prev_overs = models.IntegerField("Strike Rate", null=True)
+
+
+class ScoreCard(models.Model):
+    batteam = models.CharField("Batting", max_length=15, null=True)
+    runs = models.IntegerField("Partnership", null=True)
+    wickets = models.IntegerField("Partnership", null=True)
+    overs = models.FloatField("Runratee", null=True)
+    inng_num = models.IntegerField("Partnership", null=True)
+    extras = models.IntegerField("Partnership", null=True)
