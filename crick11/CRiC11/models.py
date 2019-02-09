@@ -79,3 +79,13 @@ class ScoreCard(models.Model):
     overs = models.FloatField("Runratee", null=True)
     inng_num = models.IntegerField("Partnership", null=True)
     extras = models.IntegerField("Partnership", null=True)
+class Teams(models.Model):
+   name = models.CharField("Team", max_length=30, PrimaryKey=True)
+
+class News(models.Model):
+    head = models.CharField("Headings", max_length=200, null=True)
+    news = models.CharField("News", max_length=50000, null=True)
+    teams = models.ForeignKey(Teams,name="Teams")
+
+
+
