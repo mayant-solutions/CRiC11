@@ -1,6 +1,6 @@
 from django.shortcuts import render, reverse, redirect
 from django.views import generic
-from .models import Player
+from .models import Player, Matches
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -35,7 +35,40 @@ def registrations(request):
             login(request, user)
             return redirect('CRiC11:Playerlist')
         else:
-            return render(request,'registration/signup.html', {'form':f})
+            return render(request, 'registration/signup.html', {'form': f})
     else:
         f = UserCreationForm()
         return render(request, 'registration/signup.html', {'form': f})
+
+
+def create(request):
+    c = Cricbuzz()
+    a = c.matches()
+    for i in a:
+        m = Matches()
+        m.id = i['id']
+        m.srs = i['srs']
+        m.status = i['status']
+        m.type = i['type']
+        m.mnum = i['mnum']
+        m.venue_name = i['venue_name']
+        m.venue_location = i['venue_location']
+        m.toss = i['toss']
+        m.save()
+    return redirect(request, 'live.html', m)
+
+
+class TemplateView1(generic.TemplateView):
+    template_name = ''
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(TemplateView1, self).get_context_data(*args, **kwargs)
+
+
+
+
+'''def team(x):
+    m.team1 = x['team1']
+    m.team2 = x['team2']
+    m.bench1 = x['bench1']
+    m.bench2 = x['bench2']'''

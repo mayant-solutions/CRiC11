@@ -62,30 +62,39 @@ class Player(models.Model):
         return self.name
 
 
+class Teams(models.Model):
+    name = models.CharField("Team", max_length=30)
+
+
 class Matches(models.Model):
-    batting = models.CharField("Batting", max_length=15, null=True)
-    bowling = models.CharField("Bowling", max_length=15, null=True)
-    batsman = models.CharField("Batsman", max_length=15, null=True)
-    bowler = models.CharField("Bowler", max_length=15, null=True)
-    runrate = models.FloatField("Runratee", null=True)
-    patnership = models.IntegerField("Partnership", null=True)
-    prev_overs = models.IntegerField("Strike Rate", null=True)
+    id = models.CharField("id", max_length=15, primary_key=True)
+    srs = models.CharField("Series", max_length=15, null=True)
+    mnum = models.CharField("Match number", max_length=15, null=True)
+    type = models.CharField("Match type", max_length=15, null=True)
+    mchstate = models.CharField("State", max_length=30, null=True)
+    status = models.CharField("Status", max_length=30, null=True)
+    venue_name = models.CharField("Venue", max_length=30, null=True)
+    venue_location = models.CharField("Location", max_length=15, null=True)
+    toss = models.CharField("Toss", max_length=15, null=True)
+    start_time = models.CharField("Start time", max_length=15, null=True)
+    '''team1 = models.ForeignKey(Teams, "Squad1", max_length=375, null=True, related_name='team1')
+    bench1 = models.ForeignKey(Teams,"Bench1", max_length=375, null=True, related_name='bench1')
+    team2 = models.ForeignKey(Teams,"Squad2", max_length=375, null=True, related_name='team2')
+    bench2 = models.ForeignKey(Teams,"Bench2", max_length=375, null=True, related_name='bench2')'''
 
 
 class ScoreCard(models.Model):
-    batteam = models.CharField("Batting", max_length=15, null=True)
+    batteam = models.CharField("Batting", max_length=15, null=True, )
     runs = models.IntegerField("Partnership", null=True)
     wickets = models.IntegerField("Partnership", null=True)
     overs = models.FloatField("Runratee", null=True)
     inng_num = models.IntegerField("Partnership", null=True)
     extras = models.IntegerField("Partnership", null=True)
-class Teams(models.Model):
-   name = models.CharField("Team", max_length=30, PrimaryKey=True)
+
 
 class News(models.Model):
     head = models.CharField("Headings", max_length=200, null=True)
     news = models.CharField("News", max_length=50000, null=True)
-    teams = models.ForeignKey(Teams,name="Teams")
-
+    teams = models.ForeignKey(Teams, name="Teams", on_delete=models.CASCADE)
 
 
