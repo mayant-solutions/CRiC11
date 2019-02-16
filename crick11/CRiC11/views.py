@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect
 from django.views import generic
 from .models import Player, Matches
@@ -58,13 +59,29 @@ def create(request):
     return redirect(request, 'live.html', m)
 
 
-class TemplateView1(generic.TemplateView):
-    template_name = ''
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(TemplateView1, self).get_context_data(*args, **kwargs)
+def extract(x):
+    return x['id']
 
 
+def getdata(x):
+    c = Cricbuzz()
+    return c.livescore(x)
+
+
+def getdetail(x):
+    c=Cricbuzz()
+
+@login_required
+def livescore(request):
+    c = Cricbuzz()
+    a = c.matches()
+    li = a[:4]
+    id1 = list(map(extract, li))
+    sc = list(map(getdata, id1))
+
+
+
+    return render(request, 'live.html', {'data': sc})
 
 
 '''def team(x):

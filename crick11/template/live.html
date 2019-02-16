@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+{% if data %}
+<ul>
+{% for i in data %}
+
+<li>{{ i.batting.team }}</li>
+
+    <li>{{ i.batting.score.0.inning_num }},{{ i.batting.score.0.runs }},{{ i.batting.score.0.wickets }},{{ i.batting.score.0.overs }},{{ i.batting.score.0.declare }} </li>
+
+    <li>{{ i.bowling.team }} </li>
+<li>{{ i.bowling.score.0.inning_num }},{{ i.bowling.score.0.runs }},{{ i.bowling.score.0.wickets }},{{ i.bowling.score.0.overs }},{{ i.bowling.score.0.declare }} </li>
+    <li>{{ i.prev_overs }} </li>
+    <li>{{ i.run_rate }} </li>
+    <li>{{ i.patnership }} </li>
+{% endfor %}
+</ul>
+{% else %}
+<p> No Data Available</p>
+{% endif %}
+{% endblock %}

@@ -77,6 +77,7 @@ class Matches(models.Model):
     venue_location = models.CharField("Location", max_length=15, null=True)
     toss = models.CharField("Toss", max_length=15, null=True)
     start_time = models.CharField("Start time", max_length=15, null=True)
+    run_rate= models.FloatField("Run Rate", null=True)
     '''team1 = models.ForeignKey(Teams, "Squad1", max_length=375, null=True, related_name='team1')
     bench1 = models.ForeignKey(Teams,"Bench1", max_length=375, null=True, related_name='bench1')
     team2 = models.ForeignKey(Teams,"Squad2", max_length=375, null=True, related_name='team2')
@@ -85,11 +86,11 @@ class Matches(models.Model):
 
 class ScoreCard(models.Model):
     batteam = models.CharField("Batting", max_length=15, null=True, )
-    runs = models.IntegerField("Partnership", null=True)
+    runs = models.IntegerField("Runs", null=True)
     wickets = models.IntegerField("Partnership", null=True)
-    overs = models.FloatField("Runratee", null=True)
-    inng_num = models.IntegerField("Partnership", null=True)
-    extras = models.IntegerField("Partnership", null=True)
+    overs = models.FloatField("Overs", null=True)
+    inng_num = models.IntegerField("Innings NO", null=True)
+    extras = models.IntegerField("Extras", null=True)
 
 
 class News(models.Model):

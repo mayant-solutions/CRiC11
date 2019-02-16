@@ -7,5 +7,6 @@ urlpatterns = [
     path('cric11/<int:pk>/', views.DetailView1.as_view(), name="PlayerDetail"),
     path('signup/', views.registrations,name="Registrations"),
     path('create/', views.create, name="Create"),
+    path('livescore/', views.livescore, name="Live")
 
 ]
