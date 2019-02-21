@@ -20,12 +20,12 @@
       <a class="navbar-brand" href="#">CRiC11</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="{% url 'CRiC11:Home' %}">Home</a></li>
        {% if user.is_authenticated %}
       <li><a href="{% url 'CRiC11:Live' %}">Live Score</a></li>
-      <li><a href="#">Schedule</a></li>
+      <li><a href="{% url 'CRiC11:Schedule' %}">Schedule</a></li>
         <li><a href="#">Series</a></li>
-        <li><a href="#">News</a></li>
+        <li><a href="{% url 'CRiC11:news' %}">News</a></li>
         <li><a href="#">Teams</a></li>
         <li><a href="{% url 'CRiC11:Create' %}">Refresh</a></li>
     </ul>

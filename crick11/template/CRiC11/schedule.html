@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+{% for i in list %}
+
+<li>{{ i.status }}</li>
+    <li>{{ i.srs }}</li>
+    <li>{{ i.mnum }}</li>
+    <li>{{ i.type }}</li>
+    <li>{{ i.mchstate }}</li>
+    <li>{{ i.venue_name }}</li>
+    <li>{{ i.venue_location }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
