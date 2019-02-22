@@ -77,7 +77,7 @@ class Matches(models.Model):
     venue_location = models.CharField("Location", max_length=15, null=True)
     toss = models.CharField("Toss", max_length=15, null=True)
     start_time = models.CharField("Start time", max_length=15, null=True)
-    run_rate= models.FloatField("Run Rate", null=True)
+
     '''team1 = models.ForeignKey(Teams, "Squad1", max_length=375, null=True, related_name='team1')
     bench1 = models.ForeignKey(Teams,"Bench1", max_length=375, null=True, related_name='bench1')
     team2 = models.ForeignKey(Teams,"Squad2", max_length=375, null=True, related_name='team2')
@@ -90,6 +90,21 @@ class ScoreCard(models.Model):
     wickets = models.IntegerField("Partnership", null=True)
     overs = models.FloatField("Overs", null=True)
     inng_num = models.IntegerField("Innings NO", null=True)
+    run_rate= models.FloatField("Run Rate", null=True)
+    pship = models.IntegerField("Partnershi",null=True)
+    bat1name = models.CharField("NAME", max_length=20, null=True)
+    b1runs = models.IntegerField("Runs", null=True)
+    b1ballfaced = models.IntegerField("BallsFaced", null=True)
+    b1fours = models.IntegerField("Fours", null=True)
+    b1sixes = models.IntegerField("Sixes", null=True)
+    bat1name = models.CharField("NAME", max_length=20, null=True)
+    b2runs = models.IntegerField("Runs", null=True)
+    b2ballfaced = models.IntegerField("BallFaced", null=True)
+    b2fours = models.IntegerField("Fours", null=True)
+    b2sixes = models.IntegerField("Sixes", null=True)
+    bowlername = models.CharField("NAME", max_length=20, null=True)
+    bovers = models.FloatField("Overs", null=True)
+    bwickets = models.IntegerField("Partnership", null=True)
     extras = models.IntegerField("Extras", null=True)
 
 
@@ -97,5 +112,5 @@ class News(models.Model):
     head = models.CharField("Headings", max_length=200, null=True)
     news = models.CharField("News", max_length=50000, null=True)
     teams = models.ForeignKey(Teams, name="Teams", on_delete=models.CASCADE)
-
-
+    run_rate= models.FloatField("Run Rate", null=True)
+# class Livescore(models.Model):

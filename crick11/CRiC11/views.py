@@ -8,8 +8,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from pycricbuzz import Cricbuzz
 from newsapi import NewsApiClient
+
 c = Cricbuzz()
 newsapi = NewsApiClient(api_key='b96cfe4919f6490c97cacf7961f31ca0')
+
 
 # Create your views here.
 class IndexView(LoginRequiredMixin, generic.ListView):
@@ -45,7 +47,6 @@ def registrations(request):
 
 
 def create(request):
-
     a = c.matches()
     for i in a:
         m = Matches()
@@ -66,8 +67,12 @@ def extract(x):
 
 
 def getdata(x):
-    c = Cricbuzz()
-    return c.livescore(x)
+
+    try:
+
+        return c.livescore(x)
+    except:
+        return x
 
 
 def getdetail(x):
@@ -76,27 +81,40 @@ def getdetail(x):
 
 @login_required
 def livescore(request):
-
     a = c.matches()
-    li = a[:4]
+    li = []
+    for i in a:
+        if i['mchstate'] == 'inprogress':
+            li.append(i)
+
+
     id1 = list(map(extract, li))
     sc = list(map(getdata, id1))
 
-    return render(request, 'live.html', {'data': sc})
+    return render(request, 'live.html', {'value': sc})
+
+
 def home(request):
-    return render(request,'CRiC11/home.html')
+    return render(request, 'CRiC11/home.html')
+
 
 def schedule(request):
-    b=c.matches()
+    b = c.matches()
+
     def filterr(x):
-        if x['mchstate']=='preview':
+        if x['mchstate'] == 'preview':
             return x
-    y=list(filter(filterr,b))
-    return render(request, 'CRiC11/schedule.html',{'list':y})
+
+    y = list(filter(filterr, b))
+    return render(request, 'CRiC11/schedule.html', {'list': y})
+
+
 def news(request):
     top_headlines = newsapi.get_top_headlines(q='cricket', category='sports', language='en')
-    hl=top_headlines['articles']
-    return render(request,'CRiC11/news.html',{'news':hl})
+    hl = top_headlines['articles']
+    return render(request, 'CRiC11/news.html', {'news': hl})
+
+
 '''def team(x):
     m.team1 = x['team1']
     m.team2 = x['team2']

@@ -2,21 +2,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul>
+
 {% for i in news %}
-    {% with "#"|add:{{ i.title }} as template %}
-        {% include template %}
-    {% endwith %}
-    {{template}}
-    <li>
+
+
     <div class="container">
-        <h6>{{ i.title }}</h6>
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target=>Simple collapsible</button>
-          <div id={{i.title}} class="collapse">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="{{i.urlToImage}}" height="200px" width="200px">
+                </div>
+                <div class="col-sm-8">
+                    <h4>{{ i.title }}</h4>
+        <button type="button" class="btn btn-sm" data-toggle="collapse" data-target='#{{ forloop.counter}}'>view more</button>
+          <div id='{{ forloop.counter}}' class="collapse">
+
             <p> {{ i.content }}</p>
+              <a href="{{i.url}}">Visit Site</a>
           </div>
+                </div>
+            </div>
+
     </div>
-    </li>
+    </div>
     {% endfor %}
-</ul>
+
 {% endblock %}
