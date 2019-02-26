@@ -8,6 +8,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from pycricbuzz import Cricbuzz
 from newsapi import NewsApiClient
+from celery.schedules import crontab
+from celery.task import periodic_task
+from .models import ScoreCard
 
 c = Cricbuzz()
 newsapi = NewsApiClient(api_key='b96cfe4919f6490c97cacf7961f31ca0')
@@ -68,12 +71,15 @@ def extract(x):
 
 def getdata(x):
 
-    try:
+    if c.livescore(x):
 
-        return c.livescore(x)
-    except:
-        return x
 
+        return True
+    else:
+        return False
+
+def getsome(x):
+    return c.livescore(x)
 
 def getdetail(x):
     c = Cricbuzz()
@@ -89,7 +95,12 @@ def livescore(request):
 
 
     id1 = list(map(extract, li))
-    sc = list(map(getdata, id1))
+    try:
+
+        sc = list(filter(getdata, id1))
+        sc = list(map(getsome, sc))
+    except:
+        sc = []
 
     return render(request, 'live.html', {'value': sc})
 
@@ -114,7 +125,41 @@ def news(request):
     hl = top_headlines['articles']
     return render(request, 'CRiC11/news.html', {'news': hl})
 
+@periodic_task(run_every=crontab(hour=0,minute=1,day_of_week="mon,tue,wed,thu,fri,sat,sun"))
+def every():
+    s=ScoreCard()
+    a = c.matches()
+    li = []
+    for i in a:
+        if i['mchstate'] == 'inprogress':
+            li.append(i)
 
+    id1 = list(map(extract, li))
+    try:
+
+        sc = list(filter(getdata, id1))
+        sc = list(map(getsome, sc))
+    except:
+        sc = []
+    for i in sc:
+        s.batteam=i['batting'][0]['team']
+        s.runs = i['batting']['score'][0]['runs']
+        s.pship = i['patnership']
+        s.wickets = i['batting']['score'][0]['wickets']
+        s.overs = i['batting']['score'][0]['overs']
+        s.run_rate = i['run_rate']
+        s.bat1name = i['batting']['batsman'][0]['name']
+        s.b1runs = i['batting']['batsman'][0]['runs']
+        s.b1ballfaced = i['batting']['batsman'][0]['balls']
+        s.b1fours = i['batting']['batsman'][0]['fours']
+        s.b1sixes = i['batting']['batsman'][0]['sixes']
+        s.bat2name = i['batting']['batsman'][1]['name']
+        s.b2runs = i['batting']['batsman'][1]['runs']
+        s.b2ballfaced = i['batting']['batsman'][1]['balls']
+        s.b2fours = i['batting']['batsman'][1]['fours']
+        s.b2sixes = i['batting']['batsman'][1]['sixes']
+        s.bowlername = i['bowling']['bowler'][0]['name']
+        s.save()
 '''def team(x):
     m.team1 = x['team1']
     m.team2 = x['team2']

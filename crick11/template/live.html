@@ -2,21 +2,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if data %}
-<ul>
-{% for i in data %}
+{% if value %}
 
-<li>{{ i.batting.team }}</li>
+{% for i in value %}
 
-    <li>{{ i.batting.score.0.inning_num }},{{ i.batting.score.0.runs }},{{ i.batting.score.0.wickets }},{{ i.batting.score.0.overs }},{{ i.batting.score.0.declare }} </li>
+<div class="jumbotron">
+    <h3 class="text-center">{{i.batting.team}} VS {{i.bowling.team}}</h3>
+    <div class='container-fluid'>
+        <div class='container'>
 
-    <li>{{ i.bowling.team }} </li>
-<li>{{ i.bowling.score.0.inning_num }},{{ i.bowling.score.0.runs }},{{ i.bowling.score.0.wickets }},{{ i.bowling.score.0.overs }},{{ i.bowling.score.0.declare }} </li>
-    <li>{{ i.prev_overs }} </li>
-    <li>{{ i.run_rate }} </li>
-    <li>{{ i.patnership }} </li>
+            <p>{{ i.batting.team }}</p>
+
+
+            <p>{{ i.batting.score.0.runs }} / {{ i.batting.score.0.wickets }}</p>
+
+
+        </div>
+        <div class='container'>
+            {% for j in i.batting.batsman %}
+
+                    <p>{{ j.name }}  {{j.runs}}
+
 {% endfor %}
-</ul>
+                </div>
+         <div class='container'>
+
+
+             <p>Run Rate : {{ i.run_rate }}  Overs : {{ i.bowling.score.0.overs }}</p>
+             <p>P'ship : {{i.patnership}}</p>
+             <p>Prev Overs : {{i.prev_overs}}</p>
+               <div class='container'>
+            {% for j in i.bowling.bowler %}
+
+                    <p>{{ j.name }} : {{j.wickets}}/{{j.runs}}
+
+{% endfor %}
+                </div>
+
+        </div>
+        </div>
+</div>
+
+
+{% endfor %}
+
 {% else %}
 <p> No Data Available</p>
 {% endif %}
