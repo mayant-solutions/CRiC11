@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
+{% if data %}
+{% for i in data %}
+
+       <p>{{i}}</p>
+
+{% endfor %}
+{% else %}
+<p>Check your spelling</p>
+{% endif %}
+{% endblock %}

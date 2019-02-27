@@ -10,5 +10,8 @@ urlpatterns = [
     path('livescore/', views.livescore, name="Live"),
     path('', views.home, name="Home"),
     path('schedule/', views.schedule, name="Schedule"),
-    path('news/', views.news, name="news")
+    path('PlayerSearch/', views.wiki, name="Search"),
+
+    path('news/', views.news, name="news"),
+
 ]
