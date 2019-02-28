@@ -167,19 +167,22 @@ def every():
 
 def capital(x):
     return x.capitalize()
+
+
 def wiki(request):
     def extract(x):
         return x.getText()
+
     if request.method == 'POST':
         f = NameForm(request.POST)
         if f.is_valid():
 
             Search = f.cleaned_data.get('search')
             a = Search.split(" ")
-            a = list(map(capital,a))
+            a = list(map(capital, a))
             s = '_'.join(a)
             try:
-                rest = requests.get('https://en.wikipedia.org/wiki/'+s)
+                rest = requests.get('https://en.wikipedia.org/wiki/' + s)
                 rest.raise_for_status()
                 a = bs4.BeautifulSoup(rest.text, 'lxml')
 
@@ -190,19 +193,17 @@ def wiki(request):
                     if ('cricketer' in i):
                         break
                 else:
-                    out=[]
+                    out = []
 
             except:
                 out = []
 
-            return render(request, 'CRiC11/playerdetail.html', {'data':out})
+            return render(request, 'CRiC11/playerdetail.html', {'data': out})
         else:
             return render(request, 'CRiC11/player.html', {'form': f})
     else:
         f = NameForm()
         return render(request, 'CRiC11/player.html', {'form': f})
-
-
 
 
 '''def team(x):
