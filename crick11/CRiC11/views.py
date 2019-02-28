@@ -8,9 +8,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from pycricbuzz import Cricbuzz
 from newsapi import NewsApiClient
+from celery.schedules import crontab
+from celery.task import periodic_task
+from .models import ScoreCard
+import bs4
+import requests
 
 c = Cricbuzz()
 newsapi = NewsApiClient(api_key='b96cfe4919f6490c97cacf7961f31ca0')
+from .forms import NameForm
 
 
 # Create your views here.
@@ -67,12 +73,15 @@ def extract(x):
 
 
 def getdata(x):
+    if c.livescore(x):
 
-    try:
+        return True
+    else:
+        return False
 
-        return c.livescore(x)
-    except:
-        return x
+
+def getsome(x):
+    return c.livescore(x)
 
 
 def getdetail(x):
@@ -87,9 +96,13 @@ def livescore(request):
         if i['mchstate'] == 'inprogress':
             li.append(i)
 
-
     id1 = list(map(extract, li))
-    sc = list(map(getdata, id1))
+    try:
+
+        sc = list(filter(getdata, id1))
+        sc = list(map(getsome, sc))
+    except:
+        sc = []
 
     return render(request, 'live.html', {'value': sc})
 
@@ -113,6 +126,83 @@ def news(request):
     top_headlines = newsapi.get_top_headlines(q='cricket', category='sports', language='en')
     hl = top_headlines['articles']
     return render(request, 'CRiC11/news.html', {'news': hl})
+
+
+@periodic_task(run_every=crontab(hour=0, minute=1, day_of_week="mon,tue,wed,thu,fri,sat,sun"))
+def every():
+    s = ScoreCard()
+    a = c.matches()
+    li = []
+    for i in a:
+        if i['mchstate'] == 'inprogress':
+            li.append(i)
+
+    id1 = list(map(extract, li))
+    try:
+
+        sc = list(filter(getdata, id1))
+        sc = list(map(getsome, sc))
+    except:
+        sc = []
+    for i in sc:
+        s.batteam = i['batting'][0]['team']
+        s.runs = i['batting']['score'][0]['runs']
+        s.pship = i['patnership']
+        s.wickets = i['batting']['score'][0]['wickets']
+        s.overs = i['batting']['score'][0]['overs']
+        s.run_rate = i['run_rate']
+        s.bat1name = i['batting']['batsman'][0]['name']
+        s.b1runs = i['batting']['batsman'][0]['runs']
+        s.b1ballfaced = i['batting']['batsman'][0]['balls']
+        s.b1fours = i['batting']['batsman'][0]['fours']
+        s.b1sixes = i['batting']['batsman'][0]['sixes']
+        s.bat2name = i['batting']['batsman'][1]['name']
+        s.b2runs = i['batting']['batsman'][1]['runs']
+        s.b2ballfaced = i['batting']['batsman'][1]['balls']
+        s.b2fours = i['batting']['batsman'][1]['fours']
+        s.b2sixes = i['batting']['batsman'][1]['sixes']
+        s.bowlername = i['bowling']['bowler'][0]['name']
+        s.save()
+
+
+def capital(x):
+    return x.capitalize()
+def wiki(request):
+    def extract(x):
+        return x.getText()
+    if request.method == 'POST':
+        f = NameForm(request.POST)
+        if f.is_valid():
+
+            Search = f.cleaned_data.get('search')
+            a = Search.split(" ")
+            a = list(map(capital,a))
+            s = '_'.join(a)
+            try:
+                rest = requests.get('https://en.wikipedia.org/wiki/'+s)
+                rest.raise_for_status()
+                a = bs4.BeautifulSoup(rest.text, 'lxml')
+
+                ele = a.select('p')
+                out = list(map(extract, ele))
+                for i in out[:3]:
+
+                    if ('cricketer' in i):
+                        break
+                else:
+                    out=[]
+
+            except:
+                out = []
+
+            return render(request, 'CRiC11/playerdetail.html', {'data':out})
+        else:
+            return render(request, 'CRiC11/player.html', {'form': f})
+    else:
+        f = NameForm()
+        return render(request, 'CRiC11/player.html', {'form': f})
+
+
 
 
 '''def team(x):

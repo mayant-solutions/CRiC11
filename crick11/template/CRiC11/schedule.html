@@ -2,16 +2,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul>
-{% for i in list %}
 
+
+         <div class='container-fluid'>
+         <div class='container'>
+
+{% for i in list %}
+<div class="jumbotron">
+    <h3 class="text-center">{{i.team1.name}} VS {{i.team2.name}}</h3>
 <li>{{ i.status }}</li>
-    <li>{{ i.srs }}</li>
-    <li>{{ i.mnum }}</li>
-    <li>{{ i.type }}</li>
-    <li>{{ i.mchstate }}</li>
-    <li>{{ i.venue_name }}</li>
-    <li>{{ i.venue_location }}</li>
+
+    <li>Series : {{ i.srs }}</li>
+    <li>Match Number : {{ i.mnum }}</li>
+    <li>Format : {{ i.type }}</li>
+    <li>State : {{ i.mchstate }}</li>
+    <li>Venue Name : {{ i.venue_name }}</li>
+    <li>Location : {{ i.venue_location }}</li>
+
+         </div>
     {% endfor %}
-</ul>
+         </div>
+    </div>
+
 {% endblock %}

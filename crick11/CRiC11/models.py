@@ -90,7 +90,7 @@ class ScoreCard(models.Model):
     wickets = models.IntegerField("Partnership", null=True)
     overs = models.FloatField("Overs", null=True)
     inng_num = models.IntegerField("Innings NO", null=True)
-    run_rate= models.FloatField("Run Rate", null=True)
+    run_rate = models.FloatField("Run Rate", null=True)
     pship = models.IntegerField("Partnershi",null=True)
     bat1name = models.CharField("NAME", max_length=20, null=True)
     b1runs = models.IntegerField("Runs", null=True)
