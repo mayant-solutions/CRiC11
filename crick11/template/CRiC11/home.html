@@ -9,7 +9,8 @@
              <li data-target="#myCarousel" data-slide-to="{{ forloop.counter }}" class="{% if forloop.first %}active{% endif %}"></li>
         {% endfor %}
     </ol>
-    <div class="carousel-inner">
+    <div class="carousel-inner" role="listbox" style=" width:100%; height: 600px !important;">
+
     {% for i in i|rjust:4 %}
 
     <!-- Wrapper for slides -->
@@ -17,8 +18,7 @@
       <div class="item {% if forloop.first %}active{% endif %}">
         <img src="media/carousel/image{{forloop.counter}}.jpg">
         <div class="carousel-caption">
-          <h3>New York</h3>
-          <p>The atmosphere in New York is lorem ipsum.</p>
+          Cricbuzz
         </div>
       </div>
         {% endfor %}
