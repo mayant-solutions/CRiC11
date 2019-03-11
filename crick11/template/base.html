@@ -1,10 +1,20 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <!-- Latest compiled and minified CSS -->
-
+  <style>
+    body{
+      background-image:url(' static img/milky-way.jpg');
+      background-repeat:no-repeat;
+      background-size:100%;
+    }
+    nav{
+      opacity:0.8;
+    }
+  </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -14,7 +24,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
+<nav class="navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">CRiC11</a>
@@ -26,15 +36,13 @@
       <li><a href="{% url 'CRiC11:Schedule' %}">Schedule</a></li>
         <li><a href="https://www.sonyliv.com/listing/all_cricket_sports">Trending</a></li>
         <li><a href="{% url 'CRiC11:news' %}">News</a></li>
-        <li><a href="#">Teams</a></li>
-        <li><a href="{% url 'CRiC11:Create' %}">Refresh</a></li>
       <li><a href="{% url 'CRiC11:Search' %}">Search</a></li>
     </ul>
 
 
     <ul class="nav navbar-nav navbar-right">
 
-    <li>User :{{user.username}}</li>
+  <p class="navbar-text">User :{{user.username}}</p>
     <li><a href="{% url 'logout' %}?next={{request.path}}"><span class="glyphicon glyphicon-log-out"></span>Log Out</a> </li>
     {% else %}
     <li><a href="{% url 'CRiC11:Registrations' %}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
