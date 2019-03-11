@@ -52,8 +52,6 @@ def registrations(request):
         return render(request, 'registration/signup.html', {'form': f})
 
 
-
-
 def extract(x):
     return x['id']
 
@@ -192,8 +190,10 @@ def wiki(request):
         return render(request, 'CRiC11/player.html', {'form': f})
 
 
-'''def team(x):
-    m.team1 = x['team1']
-    m.team2 = x['team2']
-    m.bench1 = x['bench1']
-    m.bench2 = x['bench2']'''
+class MoreScore(generic.ListView):
+    model = ScoreCard
+    template_name = 'CRiC11/morescorecard.html'
+    context_object_name = 'score'
+
+    def get_queryset(self):
+        return ScoreCard.objects.all().order_by('-date')

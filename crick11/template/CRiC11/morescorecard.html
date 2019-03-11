@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for i in score %}
+
+<div class="jumbotron" style="margin:20px 100px">
+    <div class="container">
+        <h5>{{ i.batteam }} VS {{ i.ballteam }}</h5>
+
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

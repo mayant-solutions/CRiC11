@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <!-- Latest compiled and minified CSS -->
+  {% load static %}
   <style>
     body{
-      background-image:url(' static img/milky-way.jpg');
+      background-image: url("{% static 'background/milky-way.jpg'%}")
       background-repeat:no-repeat;
       background-size:100%;
     }
     nav{
       opacity:0.8;
+      height:60px;
     }
   </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">

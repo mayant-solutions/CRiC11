@@ -13,5 +13,6 @@ urlpatterns = [
     path('PlayerSearch/', views.wiki, name="Search"),
 
     path('news/', views.news, name="news"),
+    path('viewscore/', views.MoreScore.as_view(), name='more')
 
 ]

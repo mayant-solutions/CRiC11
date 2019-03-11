@@ -1,7 +1,15 @@
 <!DOCTYPE html>
+<head>
+    <style>
+
+    </style>
+</head>
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container-fluid">
+    <a href="{% url 'CRiC11:more' %}" class="btn btn-primary">view more</a>
+</div>
 {% if value %}
 
 {% for i in value %}
