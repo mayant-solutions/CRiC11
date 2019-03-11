@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect
 from django.views import generic
-from .models import Player, Matches
+from .models import Player
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -52,20 +52,6 @@ def registrations(request):
         return render(request, 'registration/signup.html', {'form': f})
 
 
-def create(request):
-    a = c.matches()
-    for i in a:
-        m = Matches()
-        m.id = i['id']
-        m.srs = i['srs']
-        m.status = i['status']
-        m.type = i['type']
-        m.mnum = i['mnum']
-        m.venue_name = i['venue_name']
-        m.venue_location = i['venue_location']
-        m.toss = i['toss']
-        m.save()
-    return redirect(request, 'live.html', m)
 
 
 def extract(x):
