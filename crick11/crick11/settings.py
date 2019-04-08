@@ -30,6 +30,7 @@ _ALLOWED_HOSTS =[]
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     "CRiC11",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -125,3 +126,5 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Kolkata'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
